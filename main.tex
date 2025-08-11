@@ -1,0 +1,64 @@
+\documentclass{article}[11pt]
+\usepackage[a4paper,margin=1in]{geometry}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage[style=authoryear,backend=biber]{biblatex}
+\addbibresource{references.bib}
+\usepackage{graphicx}
+\usepackage{mdframed}
+
+\DeclareFieldFormat{title}{#1}
+\DeclareCiteCommand{\fullcite}
+  {\usebibmacro{prenote}}
+  {\printfield{title}} 
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+
+\begin{document}
+\noindent Student ID: 300680096 \\
+\noindent \textit{You should choose 3-5 papers in your approved application area. Your selected papers should be coherent --- not too similar, but still related enough that they provide a good overview of the main applications and techniques in your area. The provided word targets are guidelines --- it is important that you are sufficiently detailed but also demonstrating an ability to write concisely.\\ \\
+Please delete the text in italics for your final submission. Submit in PDF format by the deadline.
+}
+
+\section*{Introduction (target 150--250 words)}
+\begin{mdframed}[] %remove this argument
+\textit{(Introduce the application area you are going to cover. Make sure that you have constrained your focus to a narrow area.)}
+\end{mdframed}
+
+\section*{Key Points in the Papers (target 600-800 words)}
+\begin{mdframed}[] %remove this argument
+\textit{(For each paper:
+\begin{itemize}
+    \item[-] List the main contributions/findings of the paper (typically 1 to 3 per paper, a few sentences per contribution/finding).
+    \item[-] List any ideas or results in the paper that you thought were particularly interesting and explain why.
+    \item[-] List any significant limitations you identified in the work.)
+\end{itemize}}
+
+To explore this area I will look at the following papers:
+\begin{itemize}
+    \item \fullcite{marksAuditingLanguageModels2025} to see how effectively current method discover maligned models.
+    \item \fullcite{bondarenkoDemonstratingSpecificationGaming2025} to explore an instance of malignment in a deployed language model.
+    \item \fullcite{yuanSEvalAutomatedComprehensive2025} to understand the method of using LLM to evaluate LLMs.
+\end{itemize}
+
+\end{mdframed}
+
+\section*{Discussion (target 300-400 words)}
+\begin{mdframed}[] %remove this argument
+\textit{(You should:
+\begin{itemize}
+    \item[(a)] Compare and contrast the papers.
+    \item[(b)] Identify where these papers could head –-- e.g.\ new research questions or applications to real tasks.
+\end{itemize}
+An excellent discussion will cohesively link the papers together and provide critical insight into the application area as a whole and where it is/could be going in the future.)
+}
+\end{mdframed}
+
+
+\section*{References}
+\begin{mdframed}[] %remove this argument
+\printbibliography[heading=none]
+\end{mdframed}
+\end{document}
