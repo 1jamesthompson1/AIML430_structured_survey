@@ -10,11 +10,28 @@
 
 \DeclareFieldFormat{title}{#1}
 \DeclareCiteCommand{\fullcite}
-  {\usebibmacro{prenote}}
-  {\printfield{title}} 
-  {\multicitedelim}
-  {\usebibmacro{postnote}}
+    {\usebibmacro{prenote}}
+    {\printfield{title} (\cite{\thefield{entrykey}})} 
+    {\multicitedelim}
+    {\usebibmacro{postnote}}
 
+\newcommand{\paperdetails}[4]{
+\subsection*{Paper: \fullcite{#1}}
+\begin{itemize}
+    \item \textbf{Main Contributions/Findings:}
+    \begin{itemize}
+        #2
+    \end{itemize}
+    \item \textbf{Interesting Ideas/Results:}
+    \begin{itemize}
+        #3
+    \end{itemize}
+    \item \textbf{Significant Limitations:}
+    \begin{itemize}
+        #4
+    \end{itemize}
+\end{itemize}
+}
 
 \begin{document}
 \noindent Student ID: 300680096 \\
@@ -42,6 +59,28 @@ To explore this area I will look at the following papers:
     \item \fullcite{bondarenkoDemonstratingSpecificationGaming2025} to explore an instance of malignment in a deployed language model.
     \item \fullcite{yuanSEvalAutomatedComprehensive2025} to understand the method of using LLM to evaluate LLMs.
 \end{itemize}
+\paperdetails{bondarenkoDemonstratingSpecificationGaming2025}{
+    \item [--] Reasoning models like o1-preview and Deepseek R1 will hack the game to win more often than not.
+    \item [--] Base Language models require more suggestive prompting before they will hack the game.
+}{
+    \item [--] Some models like o3-mini and Qwen 32B Preview would often fail to complete the task at all.
+    \item [--] Small differences in the prompt could lead to large differences in the models hacking attempts. For example claude 3.5 Sonnet doesn't hack at all for 2 prompts but for the third hacks about 3/4 of the time.
+}{
+    \item [--] The LLM harness used for the experiments is overly complex. This reduces the interpretability and makes the results more opaque
+    \item [--] All of the runs are judged by a LLM that disagree about 25\% of the time. I believe this rate of disagreement is significantly higher than would be found when using human judges.
+    \item [--] The goal of the experiment is to test an AI agents chance of going against the "spirit" of the task. As it is only tested on a single specific environment it is hard to generalize across to the models themselves.
+}
+
+\paperdetails{marksAuditingLanguageModels2025}{
+    \item [--] Current malignment auditing techniques can discover hidden objectives in LLMs. When working in the context of an AI developer who has access to the training data and weights they can in a reasonble amount of time (< 1 week) identify the hidden objective and most of the biases.
+    \item [--] Without access to the training data and weights (API only access) there was no successful identifying of the known (but withheld) objective. This was used as a anecdotal proof of non-trvialilty of hidden objective toughness, however can also be used to observe current external auditing for hidden objectrive is weak.
+}{
+    \item [--] An idea that I found interesting were the authors almost dismissal of SAEs as a viable long term strategy. They seemed quite keen to show that there are other simpler methods that work.
+    \item [--] From a somewhat outsider perspective I would have assumed that searching the training data to be a bit of a crux and not "truly" auditing. I am interested that they didn't have a single team that had access to weights but not training data (like how many open source models are provided).
+}{
+    \item [--] The game was only played for a single round with only 4 teams. This is an extremely small sample size and only tests for a single type of hidden objective. It would be hard to conclude with any statistical significance if the models are effective. 
+    \item [--] The hidden objective was injected firstly through synthetic data with clear biases. This resulted in all successful teams discovering the hidden objective by finding it in the training data directly. It seems much more problematic (and much harder) to discover hidden objectives when they are simply emergent properties of such a large corpus.
+}
 
 \end{mdframed}
 
