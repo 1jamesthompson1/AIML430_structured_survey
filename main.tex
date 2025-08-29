@@ -36,13 +36,9 @@
 
 \begin{document}
 \noindent Student ID: 300680096 \\
-\noindent \textit{You should choose 3-5 papers in your approved application area. Your selected papers should be coherent --- not too similar, but still related enough that they provide a good overview of the main applications and techniques in your area. The provided word targets are guidelines --- it is important that you are sufficiently detailed but also demonstrating an ability to write concisely.\\ \\
-Please delete the text in italics for your final submission. Submit in PDF format by the deadline.
-}
 
 \section*{Introduction (target 150--250 words)}
 \begin{mdframed}[] %remove this argument
-\textit{(Introduce the application area you are going to cover. Make sure that you have constrained your focus to a narrow area.)}
 As LLMs are being deployed in production environments the need for LLM safety is increasingly pressing. When these models' capabilities increase, so does their potential for harm \cite{shevlaneModelEvaluationExtreme2023,kangExploitingProgrammaticBehavior2023}. Within the LLM safety space there are two sorts of problems. The first (harmfulness) is short term in that it should refuse to assist in harmful activities. For example teaching someone how to build a bioweapon or hack a computer. The second (alignment) is longer term and that the underlying goals of the LLM align with true human intention.  For example avoiding misaligned behavior like increasing engagement at expense of users' wellbeing. The research in this area is broadly either developing novel evaluation techniques or applying current evaluation techniques to new models.
 
 In this review I will survey three representative papers from this area. The first paper \cite{bondarenkoDemonstratingSpecificationGaming2025} uses a semi-novel evaluation technique to show a LLM cheating at chess. The second paper \cite{marksAuditingLanguageModels2025} runs a blind experiment to study the effectiveness of current safety auditing techniques in discovering hidden objectives in LLMs. The last paper \cite{yuanSEvalAutomatedComprehensive2025} proposes a new LLM-based automated test generation and evaluation framework to evaluate model harmfulness.
@@ -53,12 +49,6 @@ This survey will focus on the concept of pre-deployment tests (both harmfulness 
 
 \section*{Key Points in the Papers (target 600-800 words)}
 \begin{mdframed}[] %remove this argument
-\textit{(For each paper:
-\begin{itemize}
-    \item[-] List the main contributions/findings of the paper (typically 1 to 3 per paper, a few sentences per contribution/finding).
-    \item[-] List any ideas or results in the paper that you thought were particularly interesting and explain why.
-    \item[-] List any significant limitations you identified in the work.)
-\end{itemize}}
 
 \paperdetails{bondarenkoDemonstratingSpecificationGaming2025}{
     Palisade Research conducts experiments with different prompts and different LLMs to see how and when they will cheat at chess.
@@ -97,18 +87,10 @@ This survey will focus on the concept of pre-deployment tests (both harmfulness 
 }{
     \item [--] A problem with this framework is that it has minimal human oversight. As the scale increases (which is the goal of automation) the potential for drift in the prompt generation and response evaluation increases. Fortunately this system seems developed in a way that would allow for continual updating of the generator and evaluator model including moving to new more powerful base models.
 }
-
 \end{mdframed}
 
 \section*{Discussion (target 300-400 words)}
 \begin{mdframed}[] %remove this argument
-\textit{(You should:
-\begin{itemize}
-    \item[(a)] Compare and contrast the papers.
-    \item[(b)] Identify where these papers could head –-- e.g.\ new research questions or applications to real tasks.
-\end{itemize}
-An excellent discussion will cohesively link the papers together and provide critical insight into the application area as a whole and where it is/could be going in the future.)
-}
 We can see in \cite{bondarenkoDemonstratingSpecificationGaming2025} that current SOTA models can suggest and carry out inappropriate actions. This shows that not only does the model misinterpret (malignment) the request ("win at all costs" vs "win by playing normally") it will also respond with how to hack the game (harmful response). Current methods to test for malignment are quite limited and rely on mostly manual human methods \cite{marksAuditingLanguageModels2025} while harmfulness is becoming increasingly automated \cite{yuanSEvalAutomatedComprehensive2025}. In \cite{marksAuditingLanguageModels2025} we can fortunately see that a modern audit can identify a maligned goal like "reward models love chocolate in everything" rather than "be helpful and make the world happy". Figuring out if the model is harmless can devolve into a whack-a-mole situation where patching one problem causes regressions elsewhere. By having large scale high quality test sets one can mitigate this issue and have some higher level of confidence that the model won't respond helpfully to harmful requests. Automated test generation and evaluation is a good avenue to scale up harmfulness testing which is what \cite{yuanSEvalAutomatedComprehensive2025} explores.
 
 We use these current human based methods as well as benchmarks to give some confidence that the model is not harmful. Given the current paradigm of transformer based LLMs there is no way to prove that a model is safe, instead we can provide some certainty based on it successfully passing an ever growing amount of tests/benchmarks. Therefore to increase certainty we need to have larger scales of testing. The greatest scale can only be achieved through the use of AI. Using AI does introduce new risk factors as seen in \cite{wangLargeLanguageModels2023} but I digress. I think that the space of malignment is just as complex so requires the same scale and therefore automation as harmfulness testing. Specifically I think that having dynamically generated safety and alignment tests could help not only increase statistical significance of the results but also reduce the problem of test time behavior \cite{needhamLargeLanguageModels2025} because the environments will be more organic and less predictable. Furthermore as models get more powerful they will be better at passing these safety benchmarks and alignment benchmarks so creativity and scale will be needed to effectively test these models.
